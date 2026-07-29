@@ -1,4 +1,4 @@
-const API_KEY = "AIzaSyAbCdEfGhIjKlMnOpQrStUvWxYz123456";
+AQ.Ab8RN6LepjRAYeyqJXwX67JgUXMyjmE6wsUDSJEtqEeNiynSIw
 
 async function sendMessage() {
   const input = document.getElementById("userInput");
