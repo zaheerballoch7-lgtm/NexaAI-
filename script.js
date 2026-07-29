@@ -1,3 +1,5 @@
+const API_KEY = "YOUR_GEMINI_API_KEY";
+
 async function sendMessage() {
   const input = document.getElementById("userInput");
   const chatBox = document.getElementById("chatBox");
@@ -6,26 +8,12 @@ async function sendMessage() {
   if (!message) return;
 
   // User Message
-  const userDiv = document.createElement("div");
-  userDiv.className = "user";
-  userDiv.textContent = message;
-  chatBox.appendChild(userDiv);
-
+  chatBox.innerHTML += `<div class="user">${message}</div>`;
   input.value = "";
 
-  // Bot Loading
-  const botDiv = document.createElement("div");
-  botDiv.className = "bot";
-  botDiv.textContent = "Typing...";
-  chatBox.appendChild(botDiv);
-
-  chatBox.scrollTop = chatBox.scrollHeight;
-
   try {
-      const API_KEY = "AQ.Ab8RN6KEtEyCU5dw_Pp0588Ogv1Txi5WmBXTwemZp8HiUhZshw";
-
-    const response = await fetch( 
-      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}'
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`,
       {
         method: "POST",
         headers: {
@@ -34,13 +22,7 @@ async function sendMessage() {
         body: JSON.stringify({
           contents: [
             {
-              parts: [
-                {
-                  text:
-                    "You are NexaAI. Understand Urdu, Hindi and English. Reply in the same language as the user.\n\nUser: " +
-                    message
-                }
-              ]
+              parts: [{ text: message }]
             }
           ]
         })
@@ -49,27 +31,22 @@ async function sendMessage() {
 
     const data = await response.json();
 
-    if (data.error) {
-      botDiv.textContent = "Error: " + data.error.message;
-      return;
+    let reply = "No response";
+    if (data.candidates && data.candidates.length > 0) {
+      reply = data.candidates[0].content.parts[0].text;
     }
 
-    botDiv.textContent =
-      data.candidates?.[0]?.content?.parts?.[0]?.text ||
-      "No response from AI.";
-
+    chatBox.innerHTML += `<div class="bot">${reply}</div>`;
     chatBox.scrollTop = chatBox.scrollHeight;
 
-  } catch (err) {
-    botDiv.textContent = "Connection Error!";
-    console.error(err);
+  } catch (error) {
+    chatBox.innerHTML += `<div class="bot">❌ Error: ${error.message}</div>`;
   }
 }
 
 // Enter key support
-document.getElementById("userInput").addEventListener("keydown", function(e) {
+document.getElementById("userInput").addEventListener("keydown", function (e) {
   if (e.key === "Enter") {
     sendMessage();
   }
 });
-          
