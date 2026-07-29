@@ -1,40 +1,31 @@
-function sendMessage() {
-  const input = document.getElementById("userInput");
-  const chatBox = document.getElementById("chatBox");
 
-  const message = input.value.trim();
+async function sendMessage() {
+  const message = document.getElementById("userInput").value;
 
-  if (message === "") return;
-
-  // User message
-  const userMsg = document.createElement("div");
-  userMsg.className = "user";
-  userMsg.textContent = message;
-  chatBox.appendChild(userMsg);
-
-  input.value = "";
-
-  // Bot reply
-  setTimeout(() => {
-    const botMsg = document.createElement("div");
-    botMsg.className = "bot";
-
-    let reply = "Sorry, I don't understand.";
-
-    const text = message.toLowerCase();
-
-    if (text.includes("hello") || text.includes("hi")) {
-      reply = "Hello! 👋 Welcome to NexaAI.";
-    } else if (text.includes("how are you")) {
-      reply = "I'm doing great! How can I help you?";
-    } else if (text.includes("your name")) {
-      reply = "My name is NexaAI.";
-    } else if (text.includes("bye")) {
-      reply = "Goodbye! Have a nice day.";
+  const response = await fetch(
+    "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=YOUR_API_KEY",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        contents: [
+          {
+            parts: [
+              {
+                text: "You are NexaAI. Reply in the same language as the user. Understand Urdu, Hindi, and English.\n\nUser: " + message
+              }
+            ]
+          }
+        ]
+      })
     }
+  );
 
-    botMsg.textContent = reply;
-    chatBox.appendChild(botMsg);
-    chatBox.scrollTop = chatBox.scrollHeight;
-  }, 500);
+  const data = await response.json();
+
+  const reply =
+    data.candidates?.[0]?.content?.parts?.[0]?.text ||
+    "No response";
 }
