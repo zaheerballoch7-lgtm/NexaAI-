@@ -32,13 +32,14 @@ async function sendMessage() {
       }
     );
 
-    alert(JSON.stringify(data));
-    console.log(data);
+    const data = await response.json();
+alert(JSON.stringify(data));
+console.log(data);
 
-    if (data.error) {
-      chatBox.innerHTML += `<div class="bot">❌ ${data.error.message}</div>`;
-      return;
-    }
+if (data.error) {
+  chatBox.innerHTML += `<div class="bot">❌ ${data.error.message}</div>`;
+  return;
+}
 
     let reply = "No response";
 
