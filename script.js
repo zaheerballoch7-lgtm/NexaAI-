@@ -22,7 +22,7 @@ async function sendMessage() {
   chatBox.scrollTop = chatBox.scrollHeight;
 
   try {
-        const API_KEY = "AIzaSy................................";
+      const API_KEY = "AQ.Ab8RN6KEtEyCU5dw_Pp0588Ogv1Txi5WmBXTwemZp8HiUhZshw";
 
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`,
