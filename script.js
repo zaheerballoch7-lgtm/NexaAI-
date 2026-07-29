@@ -1,4 +1,5 @@
-const API_KEY = AQ.Ab8RN6INwM_tq3BIuG8s8_lT5ECjebrUAqFOQ-bcU5kPSnTW-g
+const API_KEY = 
+  AQ.Ab8RN6INwM_tq3BIuG8s8_lT5ECjebrUAqFOQ-bcU5kPSnTW-g
 
 async function sendMessage() {
   const input = document.getElementById("userInput");
