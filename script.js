@@ -1,4 +1,5 @@
-const API_KEY = "YAHAN_APNI_ASLI_GEMINI_API_KEY_DALO";
+const API_KEY = "YOUR_GEMINI_API_KEY";
+
 async function sendMessage() {
   const input = document.getElementById("userInput");
   const chatBox = document.getElementById("chatBox");
@@ -32,13 +33,11 @@ async function sendMessage() {
     );
 
     const data = await response.json();
-alert(JSON.stringify(data));
-console.log(data);
 
-if (data.error) {
-  chatBox.innerHTML += `<div class="bot">❌ ${data.error.message}</div>`;
-  return;
-}
+    if (data.error) {
+      chatBox.innerHTML += `<div class="bot">❌ ${data.error.message}</div>`;
+      return;
+    }
 
     let reply = "No response";
 
@@ -59,9 +58,8 @@ if (data.error) {
   }
 }
 
-document.getElementById("userInput").addEventListener("keydown", function (e) {
+document.getElementById("userInput").addEventListener("keydown", function(e) {
   if (e.key === "Enter") {
     sendMessage();
   }
 });
-
