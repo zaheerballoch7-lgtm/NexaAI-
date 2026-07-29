@@ -1,4 +1,4 @@
-const API_KEY = "YOUR_GEMINI_API_KEY";
+const API_KEY = "YAHAN_APNI_COPIED_API_KEY_PASTE_KAREIN";
 
 async function sendMessage() {
   const input = document.getElementById("userInput");
