@@ -1,5 +1,4 @@
-const API_KEY 
-  AQ.Ab8RN6IXmISNBjemQ3JZTWhcvMkXj4KmwIAseylV3ssUDkf-Wg
+const API_KEY = "YAHAN_APNI_ASLI_GEMINI_API_KEY_DALO";
 async function sendMessage() {
   const input = document.getElementById("userInput");
   const chatBox = document.getElementById("chatBox");
