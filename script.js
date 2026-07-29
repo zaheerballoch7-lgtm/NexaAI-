@@ -32,7 +32,7 @@ async function sendMessage() {
       }
     );
 
-    const data = await response.json();
+    alert(JSON.stringify(data));
     console.log(data);
 
     if (data.error) {
