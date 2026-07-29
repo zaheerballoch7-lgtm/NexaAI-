@@ -1,4 +1,4 @@
-const API_KEY = "YAHAN_APNI_COPIED_API_KEY_PASTE_KAREIN";
+const API_KEY = "AQ.Ab8RN6KKj1waOjb5nxti9vmsRaJ...";
 
 async function sendMessage() {
   const input = document.getElementById("userInput");
